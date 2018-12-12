@@ -11,6 +11,7 @@ gunicorn = "*"
 Werkzeug = "*"
 scikit-learn = "*"
 joblib = "*"
+matplotlib = "*"
 
 [requires]
 
