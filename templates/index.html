@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</head>
+<body>
+<h1>STAT-542 Project - Sentiment Analysis</h1>
+<h3>SVM Model with TFID Vectorizer.</h3>
+
+<p> Our objective for this project was to create binary classifier that could classify word vectors into negative or
+positive based on training data from IMDB movie reviews. My approach as suggested by Prof. Liang, was to create a 40K
+vocabulary using the documents from the test dataset, without stemming or normalization and up to 2-ngrams. </p>
+<p> Then reduce the vocabulary using the two-sample t-statistic shown below, and otbain the top 3K words using the
+absolute value of the p-val generated. This results in a more meaningful vocabulary, and easer to explain for the
+model. </p>
+<p> My final model for this project was a Linear SVC, since text data is often linearly separable and it was
+easier to train compared to Neural Networks or Gradient Boosted Trees. </p>
+Given:
+$$
+X_1, X_2, ... X_m \space  Y_1, Y_2, ... Y_n
+$$
+
+$$ \begin{equation}
+ p=\frac{\bar{X} - \bar{Y}}{\sqrt{\frac{var(X)}{m} + \frac{var(Y)}{n}}}\
+\end{equation} $$
+<h3>Enter a movie review:</h3>
+Once query is submitted, the API will make a prediction based on the review. The first graph shows the
+probailities, and the second graph is a breakdown of the words in the vocabulary with its p-value. (Not Tfidf)
+<br></br>
+<form action="/predict" method="GET" id="predform">
+    <input type="submit">
+</form>
+<textarea rows="8" cols="100" name="sentence" form="predform">
+  The Room is one of the most bizarre movies of all time, it condescends it's audience
+  leaving us to wonder how could something so bad, be so good.
+  This movie is a must see.</textarea>
+
+<div>
+<img src="data:image/png;base64,{{chart1}}" alt="" style="width:350px;height:300px;">
+<img src="data:image/png;base64,{{chart2}}" alt="" style="width:750px;height:600px;">
+</div>
+</body>
+</html>
